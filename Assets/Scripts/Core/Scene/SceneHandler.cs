@@ -17,43 +17,29 @@ public struct Triangle
     }
 }
 
-
-public class SceneHandler : MonoBehaviour
+public static class SceneHandler
 {
     
-    public GameObject plane;
-
-
-    private void Start()
-    {
-        
-        plane = CreateObject("Terrain");
-
-
-
-    }
-
     
-    private GameObject CreateObject(string name)
-    {
+    //Создаем объект на сцене
+    public static GameObject CreateObject(string name, Vector2Int size, string parent = "Scene")
+    {          
         
-        GameObject new_object = new GameObject(name);
-        new_object.transform.SetParent(transform);
-        MeshRenderer meshRenderer = new_object.AddComponent<MeshRenderer>();
-        MeshFilter meshFilter = new_object.AddComponent<MeshFilter>();
+        GameObject obj = new GameObject(name);
+        if (parent != null)
+            obj.transform.parent = GameObject.Find(parent).transform;
+
         
-        meshFilter.mesh = CreateMesh("Custom mesh", 10, 10);
+        MeshRenderer meshRenderer = obj.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
         
-        return new_object;
-    }
-
-
-    private Mesh CreateMesh(string name, int length, int width)
-    {
-        Mesh mesh = new Mesh();
+        MeshFilter meshFilter = obj.AddComponent<MeshFilter>();
         
+        Mesh mesh = new Mesh();
         mesh.name = name;
+        
+        int width = size.x;
+        int length = size.y;
         
         List<Vector3> vList = new List<Vector3>();
         for(int z = 0; z < width + 1; z++ )
@@ -90,11 +76,10 @@ public class SceneHandler : MonoBehaviour
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
-        //mesh.RecalculateTangents();    
+        mesh.RecalculateTangents();
 
-    
-        return mesh;
-
+        meshFilter.mesh = mesh;
+        
+        return obj;
     }
-
 }
