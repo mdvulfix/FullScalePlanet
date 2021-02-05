@@ -17,29 +17,35 @@ public struct Triangle
     }
 }
 
-public static class SceneHandler
+public static class ObjectHandler
 {
     
-    
-    //Создаем объект на сцене
-    public static GameObject CreateObject(string name, Vector2Int size, string parent = "Scene")
+    public static GameObject CreateObject(string name, string parent = "Scene")
     {          
         
         GameObject obj = new GameObject(name);
         if (parent != null)
             obj.transform.parent = GameObject.Find(parent).transform;
-
         
+        return obj;
+    }
+
+    public static void AddMeshRenderer(GameObject obj)
+    {
         MeshRenderer meshRenderer = obj.AddComponent<MeshRenderer>();
         meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
-        
+    }
+    
+    public static void AddMeshFilter(GameObject obj, Mesh mesh)
+    {
         MeshFilter meshFilter = obj.AddComponent<MeshFilter>();
-        
+        meshFilter.mesh = mesh;
+    }
+
+    public static Mesh CreateMesh(string name, int width = 1, int length = 1)
+    {
         Mesh mesh = new Mesh();
         mesh.name = name;
-        
-        int width = size.x;
-        int length = size.y;
         
         List<Vector3> vList = new List<Vector3>();
         for(int z = 0; z < width + 1; z++ )
@@ -78,8 +84,8 @@ public static class SceneHandler
         mesh.RecalculateNormals();
         mesh.RecalculateTangents();
 
-        meshFilter.mesh = mesh;
-        
-        return obj;
+        return mesh;
     }
+
+
 }
