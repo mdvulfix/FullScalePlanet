@@ -8,8 +8,7 @@ namespace Core.Processors
 
         public override void Awake()
         {
-            LoadScreenDataImage();
-            LoadMainMenu();
+
             
     
         }

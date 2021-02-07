@@ -10,12 +10,20 @@ namespace Game.Map
     public class MapController: AController
     {
         public Map _map;
-        public int Width;
-        public int Length;
+        public int Width = 5;
+        public int Length = 5;
         
         public override void Awake()
         {
             Messenger.Send("Map controller initialization...");
+
+        }
+
+
+        public void Start()
+        {
+            CreateMap();
+            
         }
         
         
@@ -23,13 +31,16 @@ namespace Game.Map
         {
             GameObject obj = SceneObjectHandler.CreateObject("Map");
             SceneObjectHandler.AddMeshRenderer(obj);
-            Mesh mesh = SceneObjectHandler.CreateMesh("Сustom", 10, 10);
+            Mesh mesh = SceneObjectHandler.CreateMesh("Сustom", Width, Length);
             SceneObjectHandler.AddMeshFilter(obj, mesh);
 
-            _map = new Map(obj, Width, Length);
-            _map.SetNoiseMap();
-            _map.SetColorMap();
-            _map.SetTexture();
+            _map = obj.AddComponent<Map>();
+            _map._width = Width;
+            _map._width = Length;
+            //_map = new Map(obj, Width, Length);
+            //_map.SetNoiseMap();
+            //_map.SetColorMap();
+            //_map.SetTexture();
 
         }
     }

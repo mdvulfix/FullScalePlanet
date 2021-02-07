@@ -6,12 +6,11 @@ namespace Core.Handlers
 {
     public static class SceneObjectHandler
     {
-        public static GameObject CreateObject(string name, string parent = "Core")
+        public static GameObject CreateObject(string name, string parent = "Scene")
         {          
             
             GameObject obj = new GameObject(name);
-            if (parent != "Core")
-                obj.transform.parent = GameObject.Find(parent).transform;
+            obj.transform.parent = GameObject.Find(parent).transform;
 
             return obj;
         }

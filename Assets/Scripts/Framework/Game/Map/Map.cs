@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Core.Handlers;
 
 namespace Game.Map
 {
-    public class Map
+    [Serializable]
+    public class Map: MonoBehaviour
     {
     
-        private GameObject _obj;
-        private int _width;
-        private int _length;
+        public GameObject _obj;
+        public int _width;
+        public int _length;
         
 
         private float[,] _noiseMap;
