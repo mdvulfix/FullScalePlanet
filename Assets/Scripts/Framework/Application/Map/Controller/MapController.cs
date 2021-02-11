@@ -1,17 +1,13 @@
-﻿using UnityEngine;
 using Core;
 using Core.Controllers;
-using Core.Handlers;
 
-namespace Game.Map
+
+namespace Application.Map
 {
     
 
     public class MapController: AController
     {
-        public Map _map;
-        public int Width = 5;
-        public int Length = 5;
         
         public override void Awake()
         {
@@ -22,11 +18,18 @@ namespace Game.Map
 
         public void Start()
         {
-            CreateMap();
             
+            CreateMap();
         }
         
-        
+       
+       public void CreateMap()
+       {
+           MapGenerator.Create<MapContinental>(10, 10);
+
+       }
+       
+        /*
         public void CreateMap()
         {
             GameObject obj = SceneObjectHandler.CreateObject("Map");
@@ -43,5 +46,6 @@ namespace Game.Map
             //_map.SetTexture();
 
         }
+        */
     }
 }

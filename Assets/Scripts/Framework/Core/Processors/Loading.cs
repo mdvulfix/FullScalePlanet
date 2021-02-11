@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Game.Map;
+using Application.Map;
 
 namespace Core.Processors
 {
