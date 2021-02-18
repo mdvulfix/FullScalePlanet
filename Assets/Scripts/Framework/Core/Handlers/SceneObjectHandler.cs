@@ -6,7 +6,7 @@ namespace Core.Handlers
 {
     public static class SceneObjectHandler
     {
-        public static GameObject CreateObject(string name, string parent = "Scene")
+        public static GameObject CreateObject(string name = "new object", string parent = "Scene")
         {          
             
             GameObject obj = new GameObject(name);
@@ -27,7 +27,7 @@ namespace Core.Handlers
             meshFilter.mesh = mesh;
         }
 
-        public static Mesh CreateMesh(string name, int width = 1, int length = 1)
+        public static Mesh CreateMesh(int width = 1, int length = 1, string name = "custom mesh")
         {
             Mesh mesh = new Mesh();
             mesh.name = name;

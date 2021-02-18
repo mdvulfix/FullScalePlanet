@@ -1,11 +1,16 @@
+using UnityEngine;
+
 namespace Application.Map
 {
     public interface IMap
     {
+        string Name{get;}
+        
+        int Width{get;}
+        int Length{get;}
 
-        int Width{get; set;}
-        int Length{get; set;}
-
+        void SetGameObject(GameObject obj);
+        void SetParametrs(int width, int length, string name = null);
 
 
     }
