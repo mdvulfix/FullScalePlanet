@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Core.Scene;
 
-namespace Application.Map
+namespace Source.Map
 {
     public abstract class AMap: MonoBehaviour, IScene
     {

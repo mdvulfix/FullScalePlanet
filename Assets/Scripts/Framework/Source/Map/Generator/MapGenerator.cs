@@ -2,19 +2,24 @@ using UnityEngine;
 using Core.Noise;
 using Core.Handlers;
 
-namespace Application.Map
+namespace Source.Map
 {
     public static class MapGenerator
     {
-        public static void Create<T>(int width = 1, int length = 1, string name = null) where T: MonoBehaviour, IMap, new()
+        public static void Create<T>(int width = 1, int length = 1, int scale = 5, string name = null) where T: MonoBehaviour, IMap, new()
         {
            
             GameObject objMap = GetObject(width, length);
-            float[,] noiseMap = GetNoiseMap<PrelinNoise>(width, length);
+            MeshRenderer meshRenderer = objMap.GetComponent<MeshRenderer>();
+            
+            Material mat = GetMaterial("Unlit");
+
+            float[,] noiseMap = GetNoiseMap<PrelinNoise>(width, length, scale);
             Texture2D texture = GetTexture(width, length, noiseMap);
 
+            mat.mainTexture = texture;
+            meshRenderer.sharedMaterial = mat;
 
-            
             IMap map = objMap.AddComponent<T>();
             
             map.SetParametrs(width, length);
@@ -46,11 +51,15 @@ namespace Application.Map
 
         private static Texture2D GetTexture(int width, int length, float[,] noiseMap)
         {
-            Texture2D texture = SpriteHandler.CreateTexture(width, length, noiseMap);
+            Texture2D texture = TextureHandler.CreateTexture(width, length, noiseMap);
             return texture;
         }
 
-
+        private static Material GetMaterial(string name)
+        {
+            Material mat = ResourceHandler.GetMaterial(name);
+            return mat;
+        }
     }
 
 }

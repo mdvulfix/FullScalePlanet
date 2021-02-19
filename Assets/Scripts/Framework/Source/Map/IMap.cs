@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Application.Map
+namespace Source.Map
 {
     public interface IMap
     {
