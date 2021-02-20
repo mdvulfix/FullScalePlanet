@@ -4,9 +4,14 @@ namespace Core.Controllers
 {
     
     [Serializable]
-    public abstract class AController: MonoBehaviour 
+    public abstract class AController: ASceneObject 
     {
-        public abstract void Awake();
+        public override void Awake()
+        {
+            
+            Messenger.Send("Map controller was initialized");
+
+        }
 
 
     }

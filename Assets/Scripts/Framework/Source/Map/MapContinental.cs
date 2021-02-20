@@ -1,58 +1,28 @@
 ﻿using System;
 using UnityEngine;
-using Core.Handlers;
-using Core.Scene;
-
 
 namespace Source.Map
 {
-    [Serializable]
-    public class MapContinental: AMap, IMap, IScene
+    public class MapContinental: AMap, IMap
     {
-        public string Name{get; protected set;} = "Map: Сontinental";
+        //public GameObject   Obj    {get  => _obj;     protected set => _obj = value;}
         
-        [SerializeField]private int _width;
-        [SerializeField]private int _length; 
+        public string       Name   {get  => _name;    protected set => _name = value;}
+        public int          Width  {get  => _width;   protected set => _width = value;}
+        public int          Length {get  => _length;  protected set => _length = value;}
+        public float        Scale  {get  => _scale;   protected set => _scale = value;}
         
-        public int Width{get; protected set;}
-        public int Length{get; protected set;} 
-        
+        public float[,]     Noise  {get  => _noise;   protected set => _noise = value;}    
         
 
-        
-        
-        public MapContinental()
+        public override void Awake()
         {
-            
+
+            _name = "Map: Continental";
+            transform.gameObject.name = _name;
 
         }
-
-        public void SetParametrs(int width = 1, int length = 1, string name = null)
-        {
-            
-            Width = width;
-            _width = width;
-            Length = length;
-            _length = length;
-            if(name != null)
-                Name = name;
-
-        }
-        
-        
-        public void SetGameObject(GameObject obj = null)
-        {
-            if(obj!= null)
-            {
-                Obj = obj;
-                Obj.name = Name;
-            }
-            else   
-                Obj = SceneObjectHandler.CreateObject(Name);
-                
-        }
-        
-
-
+    
+    
     }
 }

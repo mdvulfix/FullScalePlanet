@@ -6,14 +6,30 @@ namespace Core.Handlers
 {
     public static class SceneObjectHandler
     {
-        public static GameObject CreateObject(string name = "new object", string parent = "Scene")
+        
+        public static GameObject CreateObject(string name = "New object", string parent = "Scene")
         {          
             
             GameObject obj = new GameObject(name);
             obj.transform.parent = GameObject.Find(parent).transform;
 
             return obj;
-        }
+        }  
+
+        public static GameObject CreateObject(string name, Transform parent)
+        {          
+            
+            GameObject obj = new GameObject(name);
+            if(parent ==null)
+                obj.transform.parent = GameObject.Find("Scene").transform;
+            else
+                obj.transform.parent = parent;
+            return obj;
+        }         
+        
+
+
+
 
         public static void AddMeshRenderer(GameObject obj)
         {

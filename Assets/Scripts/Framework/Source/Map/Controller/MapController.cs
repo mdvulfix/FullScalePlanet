@@ -1,46 +1,40 @@
+using System;
 using UnityEngine;
 using Core;
 using Core.Controllers;
-using Core.Noise;
 using Core.Handlers;
 
 
 namespace Source.Map
 {
     
-    //[ExecuteInEditMode]
     public class MapController: AController
     {
+        private IMapGenerator _generator;
         
-        public int Width = 50; 
-        public int Length = 50;
-        public int Scale = 5;
-        
-        public bool autoUpdate;
-        
-        
-        public override void Awake()
-        {
-            Messenger.Send("Map controller initialization...");
-
-        }
-
         public void Start()
         {
-            
+            SetMapGenerator<MapGeneratorDefault>("Map generator was initialized");
             CreateMap();
-        }
         
-       
-       public void CreateMap()
-       {
-            MapGenerator.Create<MapContinental>(Width, Length, Scale);
-            //float[,] noiseMap = TextureHandler.GetNoiseMap<PrelinNoise>(Width, Length, scale);
+        }
+
+        public void CreateMap()
+        {
+            _generator.SetParametrs(10, 10, 2f);
+            _generator.CreateMap<MapContinental>();
+        }
+
+        
+        public void SetMapGenerator<T>(string massege = null) where T: ASceneObject, IMapGenerator
+        {
+            string objName = "Custom generator";
+            GameObject genObj = SceneObjectHandler.CreateObject(objName, transform);
+            _generator = genObj.AddComponent<T>();
+    
+            if(massege != null)
+                Messenger.Send(massege);
             
-            //PrelinNoise noise = new PrelinNoise();
-            //float[,] noiseMap = noise.GetNoiseMap(Width, Length, scale);
-            //MapDisplay display = FindObjectOfType<MapDisplay>();
-            //display.DrawNoiseMap (noiseMap);
-       }
+        }
     }
 }

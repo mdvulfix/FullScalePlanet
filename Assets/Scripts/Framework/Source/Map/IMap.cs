@@ -4,14 +4,16 @@ namespace Source.Map
 {
     public interface IMap
     {
-        string Name{get;}
+        //GameObject   Obj    {get;}
         
-        int Width{get;}
-        int Length{get;}
+        string       Name   {get;}
+        int          Width  {get;}
+        int          Length {get;}
+        float        Scale  {get;}
+        
+        float[,]     Noise  {get;}
 
-        void SetGameObject(GameObject obj);
-        void SetParametrs(int width, int length, string name = null);
-
+        void SetParametrs(int width, int length, float scale, GameObject obj, string massege);
 
     }
 }

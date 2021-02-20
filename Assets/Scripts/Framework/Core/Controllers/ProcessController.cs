@@ -21,7 +21,12 @@ namespace Core.Processors
 
         private void Initializing()
         {
-            Messenger.Send("Initializing...");
+            Messenger.Send("Initializing map controller...");
+            
+            
+            
+            
+            
             _initialize = SceneObjectHandler.CreateObject("Initializing", transform.name);
             _initialize.AddComponent<Initializing>();
         

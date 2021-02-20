@@ -3,7 +3,9 @@ namespace Core.Noise
 {
     public class PrelinNoise: ANoise, INoise  
     {
-        public float [,] GetNoiseMap(int width, int height, float scale = 1)
+        
+        
+        public float [,] GetNoiseMap(int width, int height, float scale = 5f)
         {       
             if (scale <=0)
                 scale = 0.0001f;
