@@ -2,13 +2,15 @@ using UnityEngine;
 using UnityEditor;
 using Source.Map;
 
-[CustomEditor (typeof (MapController))]
-public class MapControllerEditor : Editor 
+[CustomEditor (typeof (MapContinental))]
+public class MapContinentalEditor : Editor 
 {
 
 	public override void OnInspectorGUI() 
 	{
-		MapController mapController = (MapController)target;
+		
+		base.OnInspectorGUI();
+		MapContinental mapContinental = (MapContinental)target;
 		/*
 		if (DrawDefaultInspector ())
 		{
@@ -18,9 +20,9 @@ public class MapControllerEditor : Editor
 			}
 		}
 		*/
-		if (GUILayout.Button ("Create")) 
+		if (GUILayout.Button ("Generate")) 
 		{
-			mapController.CreateMap ();
+			mapContinental.Generate();
 		}
 	}
 }

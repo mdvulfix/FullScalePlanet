@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using Core.Noise;
+using Core.Handlers;
 
 namespace Source.Map
 {
@@ -17,10 +19,30 @@ namespace Source.Map
 
         public override void Awake()
         {
-
             _name = "Map: Continental";
             transform.gameObject.name = _name;
 
+        }
+
+        public override void Generate()
+        {
+            //_genertor.CreateMap<(typeof(T))>();
+            
+            SetMapNoise<PrelinNoise>();
+            
+            MeshRenderer rend = transform.GetComponent<MeshRenderer>();
+            MeshFilter filt = transform.GetComponent<MeshFilter>();
+            
+            filt.mesh =  SceneObjectHandler.CreateMesh(_width, _length); 
+            
+            Material mat = ResourceHandler.GetMaterial("Unlit");
+
+            
+            Texture2D texture = TextureHandler.CreateTexture(_width, _length, _noise);
+            rend.sharedMaterial.mainTexture = texture;
+
+        
+        
         }
     
     
