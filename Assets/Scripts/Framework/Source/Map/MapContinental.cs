@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
 using Core.Noise;
-using Core.Handlers;
+using Handlers;
 
 namespace Source.Map
 {
-    public class MapContinental: AMap, IMap
+    public class MapContinental: Map
     {
         //public GameObject   Obj    {get  => _obj;     protected set => _obj = value;}
         

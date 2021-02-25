@@ -12,7 +12,7 @@ namespace Source.Map
         float[,] MapNoise {get;}
         
         void SetParametrs(int width = 1, int length = 1, float scale = 5f, string massege = null);
-        void CreateMap<T>(string massege = null) where T: ASceneObject , IMap, new();
+        void CreateMap<T>(string massege = null) where T: SceneObject , IMap, new();
 
     }
 }

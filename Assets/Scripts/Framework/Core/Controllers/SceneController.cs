@@ -1,13 +1,8 @@
 ﻿using Core;
 
-public class SceneController : ASceneObject, IController
+public class SceneController : SceneObject, IController
 {
 
-    public override void Awake() 
-    {
-        
-    
-    
-    }
+
 }
 

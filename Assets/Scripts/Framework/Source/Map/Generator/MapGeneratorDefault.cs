@@ -1,18 +1,18 @@
 using UnityEngine;
 using Core;
 using Core.Noise;
-using Core.Handlers;
+using Handlers;
 
 namespace Source.Map
 {
-    public class MapGeneratorDefault: AMapGenerator, IMapGenerator
+    public class MapGeneratorDefault: MapGenerator
     {
         public int      MapWidth  {get  => _mapWidth;   set => _mapWidth = value;}
         public int      MapLength {get  => _mapLength;  set => _mapLength = value;}
         public float    MapScale  {get  => _mapScale;   set => _mapScale = value;}
         public float[,] MapNoise  {get  => _mapNoise;   set => _mapNoise = value;}
       
-       
+        /*
         public override void CreateMap<T>(string massege = null)
         {
                        
@@ -31,6 +31,7 @@ namespace Source.Map
             IMap map = mapObj.AddComponent<T>();
             map.SetParametrs(_mapWidth, _mapLength, _mapScale, mapObj, "Map custom parametrs were set");
         }
+        */
 
     }
 
