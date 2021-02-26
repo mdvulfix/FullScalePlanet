@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using Core;
 using Handlers;
@@ -18,8 +18,8 @@ public abstract class SceneController : SceneObject, ISceneController
 
       public virtual T SetSceneHolder<T>(string name = "SceneHolder: Custom", GameObject obj = null, GameObject parent = null) where T: SceneObject, ISceneHolder, new()
       {
-      var sceneHolder = ComponentHandler.SetComponent<T>(name, obj, parent);
-      return sceneHolder;
+            var sceneHolder = ComponentHandler.SetComponent<T>(name, obj, parent);
+            return sceneHolder;
 
       }
 }
