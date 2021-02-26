@@ -8,7 +8,6 @@ namespace Core
     public abstract class StateController : SceneObject, IStateController
     {
               
-        [Header("Session"), SerializeField]
         private Session _session;             
         
         public ISession Session {get => _session; protected set => _session = value as Session;}
