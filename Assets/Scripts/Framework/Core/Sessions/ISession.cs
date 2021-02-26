@@ -5,6 +5,7 @@ namespace Core
     {
 
         IStateController StateController {get; }
-        IState CurrentState {get; }
+        IState CurrentState              {get; }
+    
     }
 }

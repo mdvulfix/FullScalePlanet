@@ -1,9 +1,10 @@
+using UnityEngine;
+
 namespace Core
 {
-
     public interface IStateController: IController
     {
-        IState SetState<T>() where T: IState, new();
+        T SetState<T>(string name = "State: Custom", GameObject obj = null, GameObject parent = null) where T: SceneObject, IState, new();
 
     }
 }

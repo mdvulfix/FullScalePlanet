@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Core
 {
     [Serializable]
-    public class State: SceneObject, IState
+    public abstract class State: SceneObject, IState
     {
         
         [SerializeField] protected string _stateName;  

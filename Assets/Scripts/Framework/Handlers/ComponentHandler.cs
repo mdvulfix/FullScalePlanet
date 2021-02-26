@@ -6,13 +6,26 @@ namespace Handlers
     public static class ComponentHandler
     {
 
-
-        public static T AddController<T>(string name = "Controller", Transform parent = null) where T: SceneObject, IController, new()
+        public static T SetComponent<T>(string name = "Custom component", GameObject obj = null, GameObject parent = null) where T: SceneObject, new()
         {
-            GameObject obj = SceneObjectHandler.CreateObject(name, parent);
-            var component = obj.AddComponent<T>();
+            
+            T component;
+            
+            if(obj!=null)
+            {
+                component = obj.AddComponent<T>();
+            }
+            else
+            {
+                var newObj = SceneObjectHandler.CreateObject(name, parent.transform);
+                component = newObj.AddComponent<T>();
+            }
+            
             return component;
         }
+        
+        
+
 
 
     }

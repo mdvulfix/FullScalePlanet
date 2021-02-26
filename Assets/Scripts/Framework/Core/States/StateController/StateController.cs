@@ -1,23 +1,32 @@
 using System;
 using UnityEngine;
+using Handlers;
 
 namespace Core
 {
     [Serializable]
-    public class StateController : Controller
+    public abstract class StateController : SceneObject, IStateController
     {
               
-        public virtual IState SetState<T>() where T: IState, new()
+        [Header("Session"), SerializeField]
+        private Session _session;             
+        
+        public ISession Session {get => _session; protected set => _session = value as Session;}
+                
+        
+        public virtual T SetState<T>(string name = "State: Custom", GameObject obj = null, GameObject parent = null) where T: SceneObject, IState, new()
         {
-            var state = new T() as IState;
+            var state = ComponentHandler.SetComponent<T>(name, obj, parent);
             return state;
 
         }
+
+        public virtual void SetSession(ISession session)
+        {
+            Session = session as Session;
+
+        }
     
-    
-        
-    
-    
-    
+
     }
 }

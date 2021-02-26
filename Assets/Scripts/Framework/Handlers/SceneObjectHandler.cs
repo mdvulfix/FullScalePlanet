@@ -7,7 +7,7 @@ namespace Handlers
     public static class SceneObjectHandler
     {
         
-        public static GameObject CreateObject(string name = "New object", string parent = "Scene")
+        public static GameObject CreateObject(string name = "Custom object", string parent = "Scene")
         {          
             
             GameObject obj = new GameObject(name);
@@ -16,13 +16,11 @@ namespace Handlers
             return obj;
         }  
 
-        public static GameObject CreateObject(string name, Transform parent)
+        public static GameObject CreateObject(string name = "Custom object", Transform parent = null)
         {          
             
             GameObject obj = new GameObject(name);
-            if(parent ==null)
-                obj.transform.parent = GameObject.Find("Scene").transform;
-            else
+            if(parent !=null)
                 obj.transform.parent = parent;
             return obj;
         }         
