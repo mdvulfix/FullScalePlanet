@@ -17,7 +17,7 @@ namespace Handlers
             }
             else
             {
-                var newObj = SceneObjectHandler.CreateObject(name, parent.transform);
+                var newObj = ObjectHandler.CreateObject(name, parent.transform);
                 component = newObj.AddComponent<T>();
             }
             

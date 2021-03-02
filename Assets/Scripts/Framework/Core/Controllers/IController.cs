@@ -3,7 +3,7 @@ namespace Core
 {
     public interface IController
     {
-        ISession Session {get; }
+        //ISession Session {get; }
 
         void SetSession(ISession session);
 

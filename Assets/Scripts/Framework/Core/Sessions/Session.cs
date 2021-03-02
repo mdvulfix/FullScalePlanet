@@ -29,7 +29,7 @@ namespace Core
             CurrentState = StateController.SetState<Initialize>(name: "State: Initialize", obj: null, parent: this.gameObject);
 
             SceneController = SetController<SceneControllerDefault>(name: "Controller: Scene", obj: this.gameObject, parent: null);
-            SceneController.SetSceneHolder<SceneHolderDefault>(name: "Scene: Default", obj: null, parent: this.gameObject);
+            SceneController.SetSceneStorage<SceneStorageDefault>(name: "Scene: Default", obj: null, parent: this.gameObject);
         }
         
         

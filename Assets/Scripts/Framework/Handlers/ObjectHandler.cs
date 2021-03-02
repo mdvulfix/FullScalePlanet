@@ -4,7 +4,7 @@ using Core.Structs;
 
 namespace Handlers
 {
-    public static class SceneObjectHandler
+    public static class ObjectHandler
     {
         
         public static GameObject CreateObject(string name = "Custom object", string parent = "Scene")

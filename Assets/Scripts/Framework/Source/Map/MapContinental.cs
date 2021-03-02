@@ -33,7 +33,7 @@ namespace Source.Map
             MeshRenderer rend = transform.GetComponent<MeshRenderer>();
             MeshFilter filt = transform.GetComponent<MeshFilter>();
             
-            filt.mesh =  SceneObjectHandler.CreateMesh(_width, _length); 
+            filt.mesh =  ObjectHandler.CreateMesh(_width, _length); 
             
             Material mat = ResourceHandler.GetMaterial("Unlit");
 
