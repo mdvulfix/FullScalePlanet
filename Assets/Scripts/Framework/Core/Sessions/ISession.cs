@@ -4,8 +4,8 @@ namespace Core
     public interface ISession
     {
 
-        IStateController StateController {get; }
-        IState CurrentState              {get; }
+        IStateMachine   StateMachine {get; }
+        IState          CurrentState {get; }
     
     }
 }

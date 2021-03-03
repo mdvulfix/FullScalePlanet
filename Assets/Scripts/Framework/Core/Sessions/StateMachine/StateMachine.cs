@@ -5,7 +5,7 @@ using Handlers;
 namespace Core
 {
     [Serializable]
-    public abstract class StateController : SceneObject, IStateController
+    public abstract class StateMachine : SceneObject, IStateMachine
     {
               
         private Session _session;             

@@ -11,22 +11,24 @@ namespace Core
     {
         [Header("Controllers")]
         [SerializeField] private SceneController _sceneController;
-        [SerializeField] private StateController _stateController;
+        
 
         [Header("State"), SerializeField]
-        private State _currentState;
-                       
+        private StateMachine    _stateMachine;
+        private State           _currentState;
         
+                       
         public ISceneController SceneController {get => _sceneController; protected set => _sceneController = value as SceneController;}
-        public IStateController StateController {get => _stateController; protected set => _stateController = value as StateController;}
-        public IState CurrentState              {get => _currentState; protected set => _currentState = value as State;}
+        
+        public IStateMachine    StateMachine    {get => _stateMachine; protected set => _stateMachine = value as StateMachine;}
+        public IState           CurrentState    {get => _currentState; protected set => _currentState = value as State;}
        
         
         protected virtual void Awake() 
         {
             
-            StateController = SetController<StateControllerDefault>(name: "Controller: State", obj: this.gameObject, parent: null);
-            CurrentState = StateController.SetState<Initialize>(name: "State: Initialize", obj: null, parent: this.gameObject);
+            SetStateMachine<StateMachineDefault>(name: "State Machine", obj: this.gameObject, parent: null);
+            CurrentState = _stateMachine.SetState<Initialize>(name: "State: Initialize", obj: null, parent: this.gameObject);
 
             SceneController = SetController<SceneControllerDefault>(name: "Controller: Scene", obj: this.gameObject, parent: null);
             SceneController.SetSceneStorage<SceneStorageDefault>(name: "Scene: Default", obj: null, parent: this.gameObject);
@@ -35,6 +37,12 @@ namespace Core
         
         
         
+        public void SetStateMachine<T>(string name, GameObject obj, GameObject parent) where T: SceneObject, IStateMachine, new()
+        {
+            StateMachine = ComponentHandler.SetComponent<T>(name, obj, parent) as T;
+            StateMachine.SetSession(this);
+
+        }   
         
         
         public T SetController<T>(string name, GameObject obj, GameObject parent) where T: SceneObject, IController, new()
