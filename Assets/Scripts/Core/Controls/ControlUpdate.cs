@@ -1,18 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ControlUpdate : MonoBehaviour
+namespace Core
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class ControlUpdate: IControlUpdate
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
+        public ISession Session {get => _session; protected set => _session = value as Session;}
+        private Session _session;  
         
+        
+        protected ControlUpdate(ISession session)
+        {
+            SetSession(session);
+
+        }
+
+#region Session
+        public virtual void SetSession(ISession session)
+        {
+            _session = session as Session;
+
+        }
+#endregion
+    
+    
+    
+    
+    
+    
+    
+    
     }
 }

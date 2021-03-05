@@ -3,14 +3,26 @@ using UnityEngine;
 using Core;
 using Handlers;
 
-public abstract class ControlScene : SceneObject, IControlScene
+public abstract class ControlScene: IControlScene
 {
-   protected Session                      _session;
-   protected Dictionary<int, string>      _storage;
 
-   [SerializeField] protected string      _activeScene;              
 
+      public ISession Session {get => _session; protected set => _session = value as Session;}
    
+   
+      protected static Dictionary<int, string>     _storage;
+
+      
+      private Session _session;    
+      
+      
+      
+      [SerializeField] protected static string     _activeScene;              
+
+      protected ControlScene(ISession session)
+      {
+            SetSession(session);
+      }
    
 #region Session
 
@@ -24,7 +36,7 @@ public abstract class ControlScene : SceneObject, IControlScene
 
 #region Storage
 
-      public virtual T SetSceneStorage<T>(string name = "SceneHolder: Custom", GameObject obj = null, GameObject parent = null) where T: SceneObject, IStorageScene, new()
+      public static T SetSceneStorage<T>(string name = "SceneHolder: Custom", GameObject obj = null, GameObject parent = null) where T: SceneObject, IStorageScene, new()
       {
             var sceneHolder = HandlerComponent.SetComponent<T>(name, obj, parent);
             return sceneHolder;
@@ -35,38 +47,38 @@ public abstract class ControlScene : SceneObject, IControlScene
 
 #region SceneManagement
 
-      public virtual void LoadScene(string name)
+      public static void LoadScene(string name)
       {
             HandlerScene.SetScene(name: name);
 
       }
 
-      public virtual void LoadScene(int index)
+      public static void LoadScene(int index)
       {
             HandlerScene.SetScene(index: index);
 
       }
       
-      public virtual void CloseScene(string name)
+      public static void CloseScene(string name)
       {
             HandlerScene.CloseScene(name: name);
 
       }
 
-      public virtual void CloseScene(int index)
+      public static void CloseScene(int index)
       {
             HandlerScene.CloseScene(index: index);
 
       }
 
-      public virtual string SetActiveScene(string name)
+      public static string SetActiveScene(string name)
       {
             _activeScene = name;
             return name;
       }
       
       
-      public virtual void NextScene(string name)
+      public static void NextScene(string name)
       {
             CloseScene(_activeScene);
             LoadScene(name); 

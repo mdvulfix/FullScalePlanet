@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+
 namespace Core
 {
     public static class Messenger

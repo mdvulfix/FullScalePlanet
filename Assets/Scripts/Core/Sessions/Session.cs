@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Core;
 using Handlers;
@@ -7,34 +8,34 @@ using Handlers;
 namespace Core
 {
     [Serializable]
-    public abstract class Session : SceneObject, ISession
+    public abstract class Session : SceneObject, ISession, IAwakable
     {
-        [Header("Controllers")]
-        [SerializeField] private ControlScene _sceneControl;
         
-
-        [Header("State"), SerializeField]
-        private StateMachine    _stateMachine;
-        private State           _currentState;
-        
-                       
-        public IControlScene    ControlScene    {get => _sceneControl; protected set => _sceneControl = value as ControlScene;}
-        
-        public IStateMachine    StateMachine    {get => _stateMachine; protected set => _stateMachine = value as StateMachine;}
+        public IStateMachine    StateMachine    {get => _stateMachine; private set => _stateMachine = value as StateMachine;}
         public IState           CurrentState    {get => _currentState; protected set => _currentState = value as State;}
-       
         
-        protected virtual void Awake() 
+        [Header("State"), SerializeField]
+        private StateMachine                _stateMachine;
+        private State                       _currentState;
+        
+        private static Dictionary<Type, IControl>  _controls;
+        
+        protected Session()
         {
-            
-            SetStateMachine<StateMachineDefault>(name: "State Machine", obj: this.gameObject, parent: null);
-            CurrentState = _stateMachine.SetState<Initialize>(name: "State: Initialize", obj: null, parent: this.gameObject);
+            OnAwake();
 
-            ControlScene = SetController<ControlSceneDefault>(name: "Controller: Scene", obj: this.gameObject, parent: null);
-            ControlScene.SetSceneStorage<StorageSceneDefault>(name: "Scene: Default", obj: null, parent: this.gameObject);
         }
         
         
+        public virtual void OnAwake() 
+        {
+
+            _controls = new Dictionary<Type, IControl>();           
+            SetStateMachine<StateMachineDefault>(name: "State Machine", obj: this.gameObject, parent: null);
+            SetControls();
+    
+
+        }
         
         
         public void SetStateMachine<T>(string name, GameObject obj, GameObject parent) where T: SceneObject, IStateMachine, new()
@@ -43,17 +44,21 @@ namespace Core
             StateMachine.SetSession(this);
 
         }   
-        
-        
-        public T SetController<T>(string name, GameObject obj, GameObject parent) where T: SceneObject, IControl, new()
+
+
+        public abstract void SetControls();
+
+        public static void AddControl<T>(T value) where T: IControl
         {
-            var controller = HandlerComponent.SetComponent<T>(name, obj, parent) as T;
-            controller.SetSession(this);
-            
-            return controller;
+            _controls.Add(typeof(T), value);
 
         }
 
+        public static void RemoveControl<T>(T value) where T: IControl
+        {
+            _controls.Remove(typeof(T));
+
+        }
 
 
 
