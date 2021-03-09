@@ -1,18 +1,41 @@
+using UnityEngine;
 
 namespace Core
 {
 
     public class SessionDefault : Session
     {
-        
-        public override void SetControls()
+        protected override void SetStateAwake()
         {
-            AddControl<ControlScene>(new ControlSceneDefault(this));
-            AddControl<ControlUpdate>(new ControlUpdateDefault(this));
+            StateMachine.SetState<StateAwakeDefault>();
 
-        
-        
         }
+
+        protected override void SetStateLoad()
+        {
+            StateMachine.SetState<StateLoadDefault>();
+
+        }
+
+        protected override void SetStatePlay()
+        {
+            StateMachine.SetState<StatePlayDefault>();
+
+        }
+
+        protected override void SetStatePause()
+        {
+            StateMachine.SetState<StatePauseDefault>();
+
+        }
+
+        protected override void SetStateExit()
+        {
+            StateMachine.SetState<StateExitDefault>();
+
+        }
+        
+        
 
     }
 }

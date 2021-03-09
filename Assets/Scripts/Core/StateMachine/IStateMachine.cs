@@ -6,7 +6,7 @@ namespace Core
     {
         
         void SetSession(ISession session);
-        T SetState<T>(string name = "State: Custom", GameObject obj = null, GameObject parent = null) where T: SceneObject, IState, new();
+        T SetState<T>(string name = "State: Custom", GameObject obj = null, GameObject parent = null) where T: IState, new();
         
 
     }

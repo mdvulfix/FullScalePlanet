@@ -147,10 +147,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 803285727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3da6128361ef4b469e3087f6edf023f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e3491f60d7f697419735b860aa4a17b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneController: {fileID: 0}
   _stateMachine: {fileID: 0}
 --- !u!4 &803285729
 Transform:

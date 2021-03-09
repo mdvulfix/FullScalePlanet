@@ -1,11 +1,11 @@
 ﻿namespace Core
 {
 
-    public class Exit : State
+    public class StateExitDefault : State
     {
             public string StateName {get  => _stateName; }
             
-            public Exit()
+            public StateExitDefault()
             {
                 _stateName = "State: Exit";
             }

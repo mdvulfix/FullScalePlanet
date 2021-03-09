@@ -35,14 +35,14 @@ public abstract class ControlScene: IControlScene
 #endregion
 
 #region Storage
-
+      /*
       public static T SetSceneStorage<T>(string name = "SceneHolder: Custom", GameObject obj = null, GameObject parent = null) where T: SceneObject, IStorageScene, new()
       {
             var sceneHolder = HandlerComponent.SetComponent<T>(name, obj, parent);
             return sceneHolder;
 
       }
-
+      */
 #endregion
 
 #region SceneManagement

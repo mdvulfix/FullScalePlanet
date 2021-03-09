@@ -11,25 +11,18 @@ public class StateMachineDefaultEditor : Editor
 		
 		base.OnInspectorGUI();
 		StateMachineDefault stateMachine = (StateMachineDefault)target;
-		/*
-		if (DrawDefaultInspector ())
+	        
+      GUILayout.BeginHorizontal();
+      if (GUILayout.Button ("Prev")) 
 		{
-			if (mapController.autoUpdate) 
-			{
-				mapController.CreateMap ();
-			}
+			//stateMachine.SetState<Load>(name: "State: Load");
 		}
-		*/
-        
-        GUILayout.BeginHorizontal();
-        if (GUILayout.Button ("Prev")) 
-		{
-			stateMachine.SetState<Load>(name: "State: Load");
-		}
+		
 		if (GUILayout.Button ("Next")) 
 		{
-			stateMachine.SetState<Streem>(name: "State: Streem");
+			//stateMachine.SetState<Streem>(name: "State: Streem");
 		}
         GUILayout.EndHorizontal();
 	}
+
 }

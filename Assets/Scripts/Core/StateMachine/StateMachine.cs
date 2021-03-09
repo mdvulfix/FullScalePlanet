@@ -5,17 +5,17 @@ using Handlers;
 namespace Core
 {
     [Serializable]
-    public abstract class StateMachine : SceneObject, IStateMachine
+    public abstract class StateMachine : Component, IStateMachine
     {
-              
-        private Session _session;             
-        
-        public ISession Session {get => _session; protected set => _session = value as Session;}
+        public GameObject   SceneObject {get; } 
+        public ISession     Session {get => _session; protected set => _session = value as Session;}
                 
+        //[SerializeField]
+        private Session _session;
         
-        public virtual T SetState<T>(string name = "State: Custom", GameObject obj = null, GameObject parent = null) where T: SceneObject, IState, new()
+        public virtual T SetState<T>(string name = "State: Custom", GameObject obj = null, GameObject parent = null) where T: IState, new()
         {
-            var state = HandlerComponent.SetComponent<T>(name, obj, parent);
+            var state = new T();
             return state;
 
         }

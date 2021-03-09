@@ -6,7 +6,7 @@ using Handlers;
 
 namespace Source.Map
 {
-    public class Map: SceneObject//, IMap
+    public class Map: MonoBehaviour//, IMap
     {
         //[SerializeField] protected GameObject   _obj;
         [SerializeField] protected string       _name;

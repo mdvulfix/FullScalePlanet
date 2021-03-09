@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Core
 {
     [Serializable]
-    public abstract class StorageScene: SceneObject, IStorageScene
+    public abstract class StorageScene: IStorageScene
     {
         
         protected Dictionary<int, string>   _storage;

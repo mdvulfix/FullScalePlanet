@@ -1,17 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Source.Map;
 
 namespace Core
 {
-    public class Load : State
+    public class StatePauseDefault : State
     {
-
-
         public string StateName {get  => _stateName; }
-        
-        public Load()
+
+        public StatePauseDefault()
         {
-            _stateName = "State: Load";
+            _stateName = "State: Pause";
         }
 
 
@@ -21,7 +20,5 @@ namespace Core
 
 
         }
-
-
     }
 }

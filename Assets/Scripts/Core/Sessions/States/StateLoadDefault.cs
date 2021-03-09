@@ -1,13 +1,17 @@
+using UnityEngine;
+using Source.Map;
+
 namespace Core
 {
-    public class Initialize : State
+    public class StateLoadDefault : State
     {
+
 
         public string StateName {get  => _stateName; }
         
-        public Initialize()
+        public StateLoadDefault()
         {
-            _stateName = "State: Initialize";
+            _stateName = "State: Load";
         }
 
 
@@ -18,11 +22,6 @@ namespace Core
 
         }
 
-    
-    
-    
-    
-    
+
     }
 }
-

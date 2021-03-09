@@ -3,14 +3,14 @@ using Source.Map;
 
 namespace Core
 {
-    public class Streem : State
+    public class StatePlayDefault : State
     {
 
         public string StateName {get  => _stateName; }
         
-        public Streem()
+        public StatePlayDefault()
         {
-            _stateName = "State: Streem";
+            _stateName = "State: Play";
         }
 
 

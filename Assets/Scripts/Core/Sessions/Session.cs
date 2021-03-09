@@ -8,60 +8,45 @@ using Handlers;
 namespace Core
 {
     [Serializable]
-    public abstract class Session : SceneObject, ISession, IAwakable
+    public abstract class Session : Component, ISession
     {
-        
         public IStateMachine    StateMachine    {get => _stateMachine; private set => _stateMachine = value as StateMachine;}
         public IState           CurrentState    {get => _currentState; protected set => _currentState = value as State;}
         
+
         [Header("State"), SerializeField]
-        private StateMachine                _stateMachine;
-        private State                       _currentState;
+        private StateMachine    _stateMachine;
+        private State           _currentState;
+   
+        protected abstract void SetStateAwake();
+        protected abstract void SetStateLoad();
+        protected abstract void SetStatePlay();
+        protected abstract void SetStatePause();
+        protected abstract void SetStateExit();
         
-        private static Dictionary<Type, IControl>  _controls;
-        
-        protected Session()
+        protected void Awake()
         {
-            OnAwake();
-
+            SetStateMachine();
         }
         
         
-        public virtual void OnAwake() 
-        {
-
-            _controls = new Dictionary<Type, IControl>();           
-            SetStateMachine<StateMachineDefault>(name: "State Machine", obj: this.gameObject, parent: null);
-            SetControls();
-    
+        protected void SetStateMachine() 
+        {          
+            SetStateMachine<StateMachineDefault>(obj: gameObject);
 
         }
         
-        
-        public void SetStateMachine<T>(string name, GameObject obj, GameObject parent) where T: SceneObject, IStateMachine, new()
+        private void SetStateMachine<T>(string name = "State Machine", GameObject obj = null, GameObject parent = null) where T: Core.Component, IStateMachine, new()
         {
-            StateMachine = HandlerComponent.SetComponent<T>(name, obj, parent) as T;
+            StateMachine = HandlerComponent.GetComponent<T>(name, obj, parent) as T;
             StateMachine.SetSession(this);
 
         }   
 
 
-        public abstract void SetControls();
-
-        public static void AddControl<T>(T value) where T: IControl
-        {
-            _controls.Add(typeof(T), value);
-
-        }
-
-        public static void RemoveControl<T>(T value) where T: IControl
-        {
-            _controls.Remove(typeof(T));
-
-        }
 
 
-
+ 
 
 
 

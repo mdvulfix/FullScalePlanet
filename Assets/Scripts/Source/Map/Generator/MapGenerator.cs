@@ -6,7 +6,7 @@ using Core.Noise;
 namespace Source.Map 
 {
     [Serializable]
-    public class MapGenerator : SceneObject//, IMapGenerator
+    public class MapGenerator : MonoBehaviour//, IMapGenerator
     {
         [SerializeField] protected string   _name;
 

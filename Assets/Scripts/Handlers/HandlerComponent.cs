@@ -6,7 +6,7 @@ namespace Handlers
     public static class HandlerComponent
     {
 
-        public static T SetComponent<T>(string name = "Custom component", GameObject obj = null, GameObject parent = null) where T: SceneObject, new()
+        public static T GetComponent<T>(string name = "Component", GameObject obj = null, GameObject parent = null) where T: Core.Component, new()
         {
             
             T component;
