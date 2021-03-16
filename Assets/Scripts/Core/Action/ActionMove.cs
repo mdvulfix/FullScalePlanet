@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Core
 {
-    public class ActionMove : Action
+    [Serializable]
+    public class ActionMove : Action<Move>
     {
         
         

@@ -3,7 +3,7 @@
 namespace Core
 {
     [Serializable]
-    public abstract class Data : IData
+    public abstract class Data<T> : IData where T: IMechanic
     {
         public static ICacheData CacheData {get; private set;}
     

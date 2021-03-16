@@ -1,6 +1,9 @@
-﻿namespace Core
+﻿using System;
+
+namespace Core
 {
-    public class DataMove : Data
+    [Serializable]
+    public class DataMove : Data<Move>
     {
         public int Speed {get; } = 10;
 

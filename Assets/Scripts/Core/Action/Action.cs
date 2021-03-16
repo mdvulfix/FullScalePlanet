@@ -3,7 +3,7 @@
 namespace Core
 {
     [Serializable]
-    public abstract class Action : IAction
+    public abstract class Action<T> : IAction where T: IMechanic
     {
         public static ICacheActions CacheActions {get; private set;}
         

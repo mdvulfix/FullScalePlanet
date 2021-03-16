@@ -4,28 +4,21 @@ namespace Core
 {
     public abstract class Cache<T> : ICache where T: ICachable
     {
-        public Dictionary<int, HashSet<T>>   Storage {get; } = new Dictionary<int, HashSet<T>>();
-        
-        public T Set(IBot bot, T instance)
+        private Dictionary<IMechanic, T> _storage;
+ 
+        public T Set(IMechanic mechanic, T instance)
         {           
-            var hash = new HashSet<T>();
-            hash.Add(instance);
-            Storage.Add(bot.GetHashCode(), hash);
+            _storage.Add(mechanic, instance);
             return instance;
         }
-        /*
-        public static T Get(IBot bot)
+        
+        public T Get(IMechanic mechanic)
         {
-            T _instance;
-            var hash = new HashSet<T>();
-            Storage.TryGetValue(bot.GetHashCode(), out hash);
-            //Hash.TryGetValue(typeof(T).GetHashCode(), out _instance);
-            
-            hash.
-
-            return _instance;
+            T instance;
+            _storage.TryGetValue(mechanic, out instance);
+            return instance;
         }
-        */
+        
     
     
     
