@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Handlers;
 
 namespace Core
 {
@@ -8,68 +9,56 @@ namespace Core
     [Serializable]
     public abstract class Bot : Component, IBot
     {
-        private static Dictionary<int, ICacheData>      _botData    = new Dictionary<int, ICacheData>(50);
-        private static Dictionary<int, ICacheActions>   _botActions = new Dictionary<int, ICacheActions>(50);
         
-        
-        //private IAction[]   _botActions;
-        //private ISignal[]   _botSignals;
+        public int ID {get; protected set;}
+        public static Dictionary<int, Dictionary<IMechanic, IData>>     DataCache {get; private set;}
+        public static Dictionary<int, Dictionary<IMechanic, IAction>>   ActionCache {get; private set;}
+        public GameObject Obj {get; private set;}
 
-        public GameObject   Obj {get; private set;}
-
-
-        public void OnAwake()
+        public virtual void OnAwake()
         {
             Obj = gameObject;
-            //_botData    = new Dictionary<int, ICacheData>(50);
-            //_botActions = new Dictionary<int, ICacheActions>(50);
-
-        
+            
+            DataCache = new Dictionary<int, Dictionary<IMechanic, IData>> (100);
+            ActionCache = new Dictionary<int, Dictionary<IMechanic, IAction>> (100);
+            
+            SetParams();       
         
         }
-
         
-        public static IData SetData(IBot bot, IMechanic mechanic, IData instance, ICacheData cache)
-        {           
-            cache.Set(mechanic, instance);
-            _botData.Add(bot.GetHashCode(), cache);
-            return instance;
-        }
-        
-        public static IAction SetData(IBot bot, IMechanic mechanic, IAction instance, ICacheActions cache)
-        {           
-            cache.Set(mechanic, instance);
-            _botActions.Add(bot.GetHashCode(), cache);
-            return instance;
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        public void OnUpdate()
+        public virtual void OnUpdate()
         {
             OnAction();
-
+        
         }
 
+        
+        public abstract void SetParams();
 
-
-        public void OnAction()
+        public virtual void OnAction()
         {
-            foreach (var action in _botActions)
+            IAction[] actions = HandlerCache<IAction>.GetAction(this);
+            foreach (var action in actions)
             {
-                //action.Execute(this);
+                action.Execute();
             }
+        
         }
-
-        public void OnSignal()
+        
+        public void Awake() 
         {
 
+            OnAwake();
+
         }
+
+
+        public void Update()
+        {
+            OnUpdate();
+        
+        }
+
 
     }
 }

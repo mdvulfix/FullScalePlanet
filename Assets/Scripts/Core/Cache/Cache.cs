@@ -2,28 +2,25 @@
 
 namespace Core
 {
-    public abstract class Cache<T> : ICache where T: ICachable
+    public static class Cache<T> 
+        where T: ICachable
     {
-        private Dictionary<IMechanic, T> _storage;
+        public static Dictionary<IMechanic, T> Storage {get; } = new Dictionary<IMechanic, T>(100);
  
-        public T Set(IMechanic mechanic, T instance)
+        public static T Set<M>(T instance) 
+            where M: IMechanic
         {           
-            _storage.Add(mechanic, instance);
+            Storage.Add(typeof(M) as IMechanic, instance);
             return instance;
         }
         
-        public T Get(IMechanic mechanic)
+        public static T Get<M>()
+            where M: IMechanic
         {
             T instance;
-            _storage.TryGetValue(mechanic, out instance);
-            return instance;
+            Storage.TryGetValue(typeof(M) as IMechanic, out instance);
+            return (T)instance;
         }
-        
-    
-    
-    
-    
-    
     }
 }
 

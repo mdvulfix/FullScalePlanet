@@ -1,29 +1,22 @@
-﻿using System;
-
-namespace Core
+﻿namespace Core
 {
-    [Serializable]
-    public abstract class Action<T> : IAction where T: IMechanic
+    public abstract class Action<T> : IAction where T : IMechanic
     {
-        public static ICacheActions CacheActions {get; private set;}
+        public IBot Bot  {get; private set;} 
         
-        public IData Date {get; }
-        
-        
-        
-        
-        public abstract void Execute(IBot bot);
-
-        
-        
-
-        public virtual void OnAwake(ICacheActions actionCache = null)
+        public Action()
         {
-            if(actionCache == null)
-                CacheActions = new CacheActionsDefault();
-            else
-                CacheActions = actionCache;
-            
+
+
         }
+        
+        public void SetBot(IBot bot)
+        {
+            Bot = bot;
+
+        }
+        
+        
+        public abstract void Execute();
     }
 }

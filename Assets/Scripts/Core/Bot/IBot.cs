@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Core
 {
     public interface IBot
     {       
-        GameObject    Obj     {get; }
         
-        void OnAction();
+        int         ID  {get; }
+        GameObject  Obj {get; }
+        
 
     }
 }

@@ -1,22 +1,12 @@
-﻿using System;
-
-namespace Core
+﻿namespace Core
 {
-    [Serializable]
-    public abstract class Data<T> : IData where T: IMechanic
+    public abstract class Data<T>: IData where T: IMechanic
     {
-        public static ICacheData CacheData {get; private set;}
-    
-    
-    
-        public virtual void OnAwake(ICacheData dataCache = null)
+        protected Data()
         {
-            if(dataCache == null)
-                CacheData = new CacheDataDefault();
-            else
-                CacheData = dataCache;
+
+
         }
-    
-    
+
     }
 }

@@ -2,7 +2,8 @@
 {
     public interface IAction: ICachable
     {
-        void Execute(IBot bot);
+        IBot Bot  {get; } 
+        void Execute();
 
 
     }
